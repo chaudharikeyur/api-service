@@ -1,0 +1,22 @@
+{
+  "name": "cicd_try",
+  "version": "1.0.0",
+  "description": "test ci/cd",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "learning"
+  ],
+  "author": "keyur",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6"
+  }
+}
