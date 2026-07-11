@@ -1,4 +1,4 @@
-name: Deploy Node.js Application to Hostinger
+name: Deploy Nodejs Application to Hostinger
 
 on:
   push:
@@ -10,34 +10,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Deploy to VPS
+      - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.2.2
         with:
           host: ${{ secrets.SSH_HOST }}
           username: root
           key: ${{ secrets.SSH_KEY }}
           port: 22
-          script_stop: true
           timeout: 60s
           command_timeout: 20m
+          debug: true
           script: |
-            set -e
-
             cd /root/api-service
-
-            echo "Pulling latest code..."
             git pull origin main
-
-            echo "Stopping old containers..."
             docker compose down
-
-            echo "Building new image..."
             docker compose up -d --build
-
-            echo "Removing unused images..."
-            docker image prune -f
-
-            echo "Deployment completed successfully!"
